@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Погода</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="eel.js"></script>
+	<link rel="icon" type="image/png" href="weather-icon.png">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="style/main.css">
+</head>
+<body>
+
+	<div class="entry">
+		<input id="location" type="text" placeholder="Город...">
+
+		<button id="show">Узнать!</button>
+	</div>
+	<hr/>
+	<div class="content">
+		<h3 align="center">Текущая погода</h3>
+		<p id="info" align="center"></p>
+	</div>
+
+	<script type="text/javascript">
+
+		function display_weather(){
+			
+			let place = document.getElementById('location').value;
+			document.getElementById("info").innerHTML = "Проверка погоды..."
+			let res = eel.start_weather(place)().then((weather)=>{
+				console.log(weather.replace("/\n/", '<br>'));
+				document.getElementById("info").innerHTML=weather.replace(/\n/g, '<br>');
+			});
+			
+
+		}
+
+		document.getElementById("show").onclick = display_weather;
+
+	</script>
+</body>
+</html>
